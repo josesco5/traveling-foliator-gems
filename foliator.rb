@@ -1,6 +1,9 @@
 #!/usr/bin/env ruby
-require 'faker'
+require 'json'
 require 'document/foliator'
+require 'net/http'
+require 'uri'
+require 'mime/types'
+require 'net/http/post/multipart'
 
-puts "hello #{Faker::Name.name}"
 puts "Foliator: #{Document::Foliator::VERSION}"
