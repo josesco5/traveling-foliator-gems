@@ -33,6 +33,7 @@ namespace :package do
     end
     sh "rm -rf packaging/tmp"
     sh "mkdir packaging/tmp"
+    sh "cp -pR local-gems packaging/tmp"
     sh "cp Gemfile Gemfile.lock packaging/tmp/"
     Bundler.with_clean_env do
       sh "cd packaging/tmp && env BUNDLE_IGNORE_CONFIG=1 bundle install --path ../vendor --without development"
@@ -63,6 +64,7 @@ def create_package(target)
   sh "mkdir #{package_dir}/lib/ruby"
   sh "tar -xzf packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-#{target}.tar.gz -C #{package_dir}/lib/ruby"
   sh "cp packaging/wrapper.sh #{package_dir}/foliator"
+  sh "cp -pR local-gems packaging/vendor"
   sh "cp -pR packaging/vendor #{package_dir}/lib/"
   sh "cp Gemfile Gemfile.lock #{package_dir}/lib/vendor/"
   sh "mkdir #{package_dir}/lib/vendor/.bundle"
