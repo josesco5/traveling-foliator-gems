@@ -61,8 +61,10 @@ def send_file_to_s3(file_path, file_name, s3_options, cookie)
       puts 'File sent successfully to S3'
       attachment_url = response['Location']
 
-      #set_file_attachment attachment_url, cookie
       puts "url: #{attachment_url}"
+      if !attachment_url.start_with? "http://localhost:3000"
+        set_file_attachment attachment_url, cookie
+      end
     end
   end
 end
