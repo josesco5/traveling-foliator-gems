@@ -97,7 +97,7 @@ module Document
         file = open file_url
         logger.info "Parsing file to PDF"
         pdf = CombinePDF.parse file.read
-        foliated_pdf = Document::Foliator.foliate(pdf, 1, false, 0, false, false)
+        foliated_pdf = Document::Foliator.foliate(pdf, start_folio, just_folios, pixels_to_left, double_sided, every_other_page)
         if stamp_url && issue_date
           logger.info "Including stamp image from: #{stamp_url}"
           foliated_pdf = Stamper.stamp(foliated_pdf, stamp_url, issue_date)
